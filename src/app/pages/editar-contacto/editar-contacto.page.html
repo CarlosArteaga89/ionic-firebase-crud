@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/contactos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>editar contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col class="colIcon">
+      <ion-icon name="create"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <form class="formContacto" [formGroup]="validations" (ngSubmit)="editarContacto()">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="floating"> <ion-icon name="person"></ion-icon> Nombre</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationmessages.name">
+          <div class="error-message" *ngIf="validations.get('name').hasError(validation.type) && (validations.get('name').dirty || validations.get('name').touched)" >
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="floating"> <ion-icon name="mail"></ion-icon> Email</ion-label>
+        <ion-input formControlName="email" type="text">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationmessages.email">
+          <div class="error-message" *ngIf="validations.get('email').hasError(validation.type) && (validations.get('email').dirty || validations.get('email').touched)" >
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="floating"> <ion-icon name="call"></ion-icon>  Celular</ion-label>
+        <ion-input formControlName="mobile" type="text">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationmessages.mobile">
+          <div class="error-message" *ngIf="validations.get('mobile').hasError(validation.type) && (validations.get('mobile').dirty || validations.get('mobile').touched)" >
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+  </form>
+  <ion-row>
+    <ion-col class="colBtn">
+      <ion-button (click)="editarContacto()" [disabled]="!validations.valid" color="dark" shape="round">guardar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
